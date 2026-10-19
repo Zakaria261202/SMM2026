@@ -111,7 +111,7 @@ h1 {
     </section>
 
     <section class="item" id="training">
-      <h2>Join the training</h2>
+      <h2>Field training in Nicaragua</h2>
       <p id="training-text">Details and registration.</p>
     </section>
   </main>
@@ -127,13 +127,13 @@ h1 {
 <script>
 /* ===== Edit here ===== */
 var CONFIG = {
-  email: "",          // e.g. "name@example.com"
+  email: "Zakaria.Barmakran@ulb.be",
   linkedin: "",       // full https:// link
   researchgate: "",   // full https:// link, optional
-  surveyUrl: "",      // Google Form link
-  surveyText: "",     // optional, one true sentence about the survey
-  trainingUrl: "",    // training page link
-  trainingText: "",   // one honest line on what the training is
+  surveyUrl: "https://tally.so/r/PRjJM1",
+  surveyText: "One question, one minute: if you could change one thing to reduce dolphin bycatch on this coast, what would it be?",
+  trainingUrl: "https://eli-s.com/en/training/",
+  trainingText: "Association ELI-S, with whom I collected the data for this study, offers hands-on marine mammal research and conservation training in San Juan del Sur, Nicaragua, from December 2026 to April 2027.",
   photos: [
     // { src: "photos/tail.jpg", caption: "Entangled tail, San Juan del Sur. Photo: ELI-S" }
   ]
@@ -158,7 +158,7 @@ function line(label, build) {
 }
 line("Email", function (p) {
   if (!CONFIG.email) { p.appendChild(el("span", { "class": "later" }, "added soon")); return; }
-  var v = el("span", {}, CONFIG.email);
+  var v = el("a", { href: "mailto:" + CONFIG.email }, CONFIG.email);
   p.appendChild(v);
   var b = el("button", { "class": "copy", type: "button" }, "copy");
   b.addEventListener("click", function () {
@@ -172,8 +172,7 @@ line("Email", function (p) {
   });
   p.appendChild(b);
 });
-line("LinkedIn", function (p) {
-  if (!isUrl(CONFIG.linkedin)) { p.appendChild(el("span", { "class": "later" }, "added soon")); return; }
+if (isUrl(CONFIG.linkedin)) line("LinkedIn", function (p) {
   p.appendChild(el("a", { href: CONFIG.linkedin, target: "_blank", rel: "noopener" }, "Zakaria Barmakran"));
 });
 if (isUrl(CONFIG.researchgate)) {
@@ -189,11 +188,11 @@ function wire(id, url, text, label) {
   if (isUrl(url)) {
     box.appendChild(el("a", { "class": "link", href: url, target: "_blank", rel: "noopener" }, label));
   } else {
-    box.appendChild(el("p", { "class": "later", style: "margin-top:8px" }, "Link added soon"));
+    box.remove();
   }
 }
-wire("survey", CONFIG.surveyUrl, CONFIG.surveyText, "Open the survey");
-wire("training", CONFIG.trainingUrl, CONFIG.trainingText, "See the training");
+wire("survey", CONFIG.surveyUrl, CONFIG.surveyText, "Share your idea");
+wire("training", CONFIG.trainingUrl, CONFIG.trainingText, "See the program");
 
 /* Photos */
 var wrap = document.getElementById("photos");
